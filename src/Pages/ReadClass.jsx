@@ -18,7 +18,7 @@ const ReadClass = ({token}) => {
     // useEffect(() => {
     //     fetchClasses()
     // }, []);
-    
+
     return (
         <div>
             {

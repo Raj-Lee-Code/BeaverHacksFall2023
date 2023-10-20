@@ -4,14 +4,14 @@ import './AddClass.css'
 function AddClass() {
 
   return (
-        <>
+      <>
         <div>
             class name
         </div>
         <div>
             period
         </div>
-        </>
+      </>
   );
 }
 

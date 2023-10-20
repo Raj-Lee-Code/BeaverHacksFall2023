@@ -3,13 +3,15 @@ import {useState, useEffect} from 'react';
 import './ClassContent.css'
 
 
-const ClassContent = () =>  {
+const ClassContent = (props) =>  {
 
+  let course = props.course
 
   return (
 
     <div id="Component">
-        <h1>Please select a class</h1>
+        <h1>This is your class</h1>
+        
     </div>
 
 
