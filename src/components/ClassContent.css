@@ -1,0 +1,11 @@
+#falseComponent{
+    margin: 10px;
+    min-height: 80vh;
+    border-style: solid;
+    border-radius: 5%;
+    border-width: 5px;
+    border-color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
