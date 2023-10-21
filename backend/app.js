@@ -174,6 +174,17 @@ app.get('/getStudentNotes', (req, res) => {
     });
 });
 
+//SELECT for Class Notes
+app.get('/getClassNotes', (req, res) => {
+    let classNotesQuery = 'SELECT Classes.name, ClassNotes.noteText FROM ClassNotes INNER JOIN Classes ON ClassNotes.classID = Classes.classID WHERE ClassNotes.classID IN (SELECT classID FROM Classes WHERE educatorID = ?) AND ClassNotes.date = CURDATE();';
+
+    pool.query(classNotesQuery, [educatorID], (err, results) => {
+            
+            //Send results to browser
+            res.send(JSON.stringify(results));
+        });
+    });
+    
 /*
     LISTENER
 */
