@@ -3,18 +3,21 @@
     SETUP
 */
 import express from 'express';
-import { pool } from './database/db_connecter.js';
-const PORT = 3306;
+import { dbConnector } from './database/db_connecter.js';
+// const PORT = 3306;
+const port = process.env.PORT || 3000;
 const app = express();
-const cors = require('cors');
+// const cors = require('cors');
 
 app.use(express.json());
+const connection = dbConnector.createDbConnection();
 
-app.use(cors({
-    origin: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-  }));
+connection.connect();
+// app.use(cors({
+//     origin: true,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'Authorization']
+//   }));
 
 /*
     ROUTES
@@ -26,7 +29,7 @@ app.post('/addClass', (req, res) => {
     
     let addClassQuery = 'INSERT INTO Classes (name, period, educatorID) VALUES (?, ?, ?);';
 
-    pool.query(addClassQuery, [className, period, educatorID], (err, results) => {
+    dbConnector.query(addClassQuery, [className, period, educatorID], (err, results) => {
         if (err) {
             console.error('Error inserting class into database:', err);
             res.status(500).json( {error: 'Internal server error: Please try again later.' });
@@ -41,7 +44,7 @@ app.post('/addStudent', (req, res) => {
 
     let addStudentQuery = 'INSERT INTO Students (fName, lName) VALUES (?, ?);';
 
-    pool.query(addStudentQuery, [fName, lName], (err, results) => {
+    dbConnector.query(addStudentQuery, [fName, lName], (err, results) => {
         if (err) {
             console.error('Error inserting student into database:', err);
             res.status(500).json( {error: 'Internal server error: Please try again later.' });
@@ -56,7 +59,7 @@ app.post('/addEducator', (req, res) => {
 
     let addEducatorQuery = 'INSERT INTO Educators (fName, lName, emailAddress, password ) VALUES (?, ?, ?, ?);';
 
-    pool.query(addEducatorQuery, [fName, lName, emailAddress, password], (err, results) => {
+    dbConnector.query(addEducatorQuery, [fName, lName, emailAddress, password], (err, results) => {
         if (err) {
             console.error('Error inserting educator into database:', err);
             res.status(500).json( {error: 'Internal server error: Please try again later.' });
@@ -71,7 +74,7 @@ app.post('/addNote', (req, res) => {
 
     let addNoteQuery = 'INSERT INTO Notes (date, noteText, studentID) VALUES (?, ?, ?);';
 
-    pool.query(addNoteQuery, [date, noteText, studentID], (err, results) => {
+    dbConnector.query(addNoteQuery, [date, noteText, studentID], (err, results) => {
         if (err) {
             console.error('Error inserting note into database:', err);
             res.status(500).json( {error: 'Internal server error: Please try again later.' });
@@ -86,7 +89,7 @@ app.post('/addClassNote', (req, res) => {
 
     let addClassNoteQuery = 'INSERT INTO ClassNotes (date, noteText, classID) VALUES (?, ?, ?);';
 
-    pool.query(addClassNoteQuery, [date, noteText, classID], (err, results) => {
+    dbConnector.query(addClassNoteQuery, [date, noteText, classID], (err, results) => {
         if (err) {
             console.error('Error inserting class note into database:', err);
             res.status(500).json( {error: 'Internal server error: Please try again later.' });
@@ -101,7 +104,7 @@ app.post('/addPointType', (req, res) => {
 
     let addPointTypesQuery = 'INSERT INTO PointTypes (pointName, defaultDailyPoints) VALUES (?, ?);';
 
-    pool.query(addPointTypesQuery, [pointName, defaultDailyPoints], (err, results) => {
+    dbConnector.query(addPointTypesQuery, [pointName, defaultDailyPoints], (err, results) => {
         if (err) {
             console.error('Error inserting point type into database:', err);
             res.status(500).json( {error: 'Internal server error: Please try again later.' });
@@ -116,7 +119,7 @@ app.post('/addPointsInClass', (req, res) => {
 
     let addPointsInClassQuery = 'INSERT INTO PointsInClasses (pointID, classID) VALUES (?, ?);';
 
-    pool.query(addPointsInClassQuery, [pointID, classID], (err, results) => {
+    dbConnector.query(addPointsInClassQuery, [pointID, classID], (err, results) => {
         if (err) {
             console.error('Error inserting PointsInClasses into database:', err);
             res.status(500).json( {error: 'Internal server error: Please try again later.' });
@@ -131,7 +134,7 @@ app.post('/addPointLog', (req, res) => {
 
     let addPointLogQuery = 'INSERT INTO PointLogs (date, points, pointID, studentID) VALUES (?, ?, ?, ?);';
 
-    pool.query(addPointLogQuery, [date, points, pointID, studentID], (err, results) => {
+    dbConnector.query(addPointLogQuery, [date, points, pointID, studentID], (err, results) => {
         if (err) {
             console.error('Error inserting PointLog into database:', err);
             res.status(500).json( {error: 'Internal server error: Please try again later.' });
@@ -145,7 +148,7 @@ app.post('/addPointLog', (req, res) => {
 app.get('/classesForEducator', (req, res) => {
     let classesQuery = 'SELECT name FROM Classes WHERE educatorID = ?;';
 
-    pool.query(classesQuery, [educatorID], (err, results) => {
+    dbConnector.query(classesQuery, [educatorID], (err, results) => {
 
         //Send results to browser
         res.send(JSON.stringify(results));
@@ -156,7 +159,7 @@ app.get('/classesForEducator', (req, res) => {
 app.get('/studentsForClass', (req, res) => {
     let studentsForClassQuery = 'SELECT fName, lName FROM Students WHERE classID = ?;';
 
-    pool.query(studentsForClassQuery, [classID], (err, results) => {
+    dbConnector.query(studentsForClassQuery, [classID], (err, results) => {
 
         //Send results to browser
         res.send(JSON.stringify(results));
@@ -167,7 +170,7 @@ app.get('/studentsForClass', (req, res) => {
 app.get('/getStudentNotes', (req, res) => {
     let notesForStudentQuery = 'SELECT DISTINCT Students.fName, Students.lName, Notes.noteText FROM Students INNER JOIN studentInClass ON Students.studentID = studentInClass.studentID INNER JOIN Classes ON studentInClass.classID = Classes.classID INNER JOIN Notes ON Students.studentID = Notes.studentID WHERE Classes.classID IN (SELECT Classes.classID FROM Classes WHERE Classes.educatorID = ?) AND Notes.date = CURDATE();';
 
-    pool.query(notesForStudentQuery, [educatorID], (err, results) => {
+    dbConnector.query(notesForStudentQuery, [educatorID], (err, results) => {
 
         //Send results to browser
         res.send(JSON.stringify(results));
@@ -178,7 +181,7 @@ app.get('/getStudentNotes', (req, res) => {
 app.get('/getClassNotes', (req, res) => {
     let classNotesQuery = 'SELECT Classes.name, ClassNotes.noteText FROM ClassNotes INNER JOIN Classes ON ClassNotes.classID = Classes.classID WHERE ClassNotes.classID IN (SELECT classID FROM Classes WHERE educatorID = ?) AND ClassNotes.date = CURDATE();';
 
-    pool.query(classNotesQuery, [educatorID], (err, results) => {
+    dbConnector.query(classNotesQuery, [educatorID], (err, results) => {
             
             //Send results to browser
             res.send(JSON.stringify(results));
@@ -188,6 +191,6 @@ app.get('/getClassNotes', (req, res) => {
 /*
     LISTENER
 */
-app.listen(PORT, function(){            
-    console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
+app.listen(port, () => {            
+    console.log(`Server is running on port ${port}`)
 });
