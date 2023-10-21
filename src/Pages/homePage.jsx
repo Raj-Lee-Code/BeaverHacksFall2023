@@ -7,10 +7,10 @@ import ClassContent from '../components/ClassContent';
 
 function HomePage() {
 
-  const [schoolClass, setClasses] = useState(0);
+  const [currentClass, setClasses] = useState(0);
 
   function ShowClass(classID) {
-
+    setClasses(classID)
   }
 
   return (
@@ -20,6 +20,7 @@ function HomePage() {
         <h2 id="classesHeader">Your Classes:</h2>
           <div id = "classButtons">
             <ReadClass/>
+
             <Link to="/AddClass">
                 <button>
                     Add a class
@@ -29,10 +30,10 @@ function HomePage() {
           </div>
       </div>
       
-      <div id="falseComponent">
+      <div >
         {
-        schoolClass == 0 ?
-        <h1>Please select a class</h1> : <ClassContent course = {schoolClass}/>
+        currentClass == 0 ?
+        <div id="falseComponent"><h1>Please select a class</h1></div> : <ClassContent course = {currentClass}/>
         }
 
       </div>

@@ -3,7 +3,7 @@ import { useRoutes } from 'react-router-dom';
 import './App.css';
 import HomePage from './Pages/homePage';
 import AddClass from './Pages/AddClass';
-
+import AddStudent from './Pages/AddStudent';
   const App = () => {
   
     // Sets up routes
@@ -20,8 +20,11 @@ import AddClass from './Pages/AddClass';
       {
         path: "/AddClass",
         element: <AddClass/>
+      },
+      {
+        path: "/AddStudent",
+        element: <AddStudent/>
       }
-
     ]);
 
   return (
