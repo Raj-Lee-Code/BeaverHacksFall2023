@@ -8,7 +8,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 USE `sati25kfy4p9qm1c` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Students`
+-- Table `Students`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`Students` (
   `studentID` INT NOT NULL AUTO_INCREMENT,
@@ -19,7 +19,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Notes`
+-- Table `Notes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`Notes` (
   `noteID` INT NOT NULL AUTO_INCREMENT,
@@ -34,7 +34,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Educators`
+-- Table `Educators`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`Educators` (
   `educatorID` INT NOT NULL AUTO_INCREMENT,
@@ -47,7 +47,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Classes`
+-- Table `Classes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`Classes` (
   `classID` INT NOT NULL AUTO_INCREMENT,
@@ -62,7 +62,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`studentInClass`
+-- Table `studentInClass`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`studentInClass` (
   `classID` INT NOT NULL,
@@ -78,9 +78,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Points`
+-- Table `PointTypes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`Points` (
+CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`PointTypes` (
   `pointID` INT AUTO_INCREMENT,
   `pointName` VARCHAR(75) NOT NULL,
   `defaultDailyPoints` INT NULL,
@@ -89,7 +89,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`PointsInClasses`
+-- Table `PointsInClasses`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`PointsInClasses` (
   `pointID` INT NOT NULL,
@@ -105,7 +105,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`PointLogs`
+-- Table `PointLogs`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`PointLogs` (
   `pointLogID` INT NOT NULL AUTO_INCREMENT,
@@ -124,7 +124,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`ClassNotes`
+-- Table `ClassNotes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`ClassNotes` (
   `classNoteID` INT NOT NULL AUTO_INCREMENT,
@@ -168,8 +168,8 @@ INSERT INTO Notes (date, noteText, studentID)
 	VALUES ("2023-10-20", "Needs help at lunch on Tuesday", 2),
 		("2023-10-20", "Cello needs bridge repaired", 1);
 
--- Insert test Points
-INSERT INTO Points (pointName, defaultDailyPoints)
+-- Insert test PointTypes
+INSERT INTO PointTypes (pointName, defaultDailyPoints)
 	VALUES ("Participation Points", 4),
 			("Has Supplies", 2),
             ("Homework Check", 2);
