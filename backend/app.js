@@ -132,6 +132,29 @@ app.post('/addPointLog', (req, res) => {
         }
     })});
 
+
+//SELECT for Classes for specific educator
+app.get('/classesForEducator', (req, res) => {
+    let classesQuery = 'SELECT name FROM Classes WHERE educatorID = ?;';
+
+    pool.query(classesQuery, [educatorID], (err, results) => {
+
+        //Send results to browser
+        res.send(JSON.stringify(results));
+    });
+});
+
+//SELECT for Students for specific class
+app.get('/studentsForClass', (req, res) => {
+    let studentsForClassQuery = 'SELECT fName, lName FROM Students WHERE classID = ?;';
+
+    pool.query(studentsForClassQuery, [classID], (err, results) => {
+
+        //Send results to browser
+        res.send(JSON.stringify(results));
+    });
+});
+
 /*
     LISTENER
 */
