@@ -18,14 +18,22 @@
 //   console.log('Connected to the database.');
 // });
 
+// // db_connector.js
+// import { createConnection } from 'mysql';
+
+// // Create and export a function to establish a database connection
+// function createDbConnection() {
+//   return createConnection(process.env.JAWSDB_URL);
+// }
+
+// export default {
+//   createDbConnection,
+// };
+
 // db_connector.js
 import { createConnection } from 'mysql';
 
 // Create and export a function to establish a database connection
-function createDbConnection() {
+export function createDbConnection() {
   return createConnection(process.env.JAWSDB_URL);
 }
-
-export default {
-  createDbConnection,
-};
