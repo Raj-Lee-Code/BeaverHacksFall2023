@@ -163,6 +163,28 @@ app.get('/studentsForClass', (req, res) => {
     });
 });
 
+//SELECT for Notes for specific student
+app.get('/getStudentNotes', (req, res) => {
+    let notesForStudentQuery = 'SELECT DISTINCT Students.fName, Students.lName, Notes.noteText FROM Students INNER JOIN studentInClass ON Students.studentID = studentInClass.studentID INNER JOIN Classes ON studentInClass.classID = Classes.classID INNER JOIN Notes ON Students.studentID = Notes.studentID WHERE Classes.classID IN (SELECT Classes.classID FROM Classes WHERE Classes.educatorID = ?) AND Notes.date = CURDATE();';
+
+    pool.query(notesForStudentQuery, [educatorID], (err, results) => {
+
+        //Send results to browser
+        res.send(JSON.stringify(results));
+    });
+});
+
+//SELECT for Class Notes
+app.get('/getClassNotes', (req, res) => {
+    let classNotesQuery = 'SELECT Classes.name, ClassNotes.noteText FROM ClassNotes INNER JOIN Classes ON ClassNotes.classID = Classes.classID WHERE ClassNotes.classID IN (SELECT classID FROM Classes WHERE educatorID = ?) AND ClassNotes.date = CURDATE();';
+
+    pool.query(classNotesQuery, [educatorID], (err, results) => {
+            
+            //Send results to browser
+            res.send(JSON.stringify(results));
+        });
+    });
+    
 /*
     LISTENER
 */
