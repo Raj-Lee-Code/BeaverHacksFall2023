@@ -10,3 +10,26 @@
     justify-content: flex-start;
     align-items: center;
   }
+
+#classNotes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#addNoteButton {
+  margin-top: 0px;
+}
+
+#notesLabel{
+  margin-bottom: 5px;
+}
+#removeClassButton{
+  margin-left: 25px;
+  background-color: red;
+}
+#classStudentDelete{
+  display: flex;
+  justify-content: center;
+}

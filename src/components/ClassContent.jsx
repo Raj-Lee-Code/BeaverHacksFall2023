@@ -29,7 +29,10 @@ const ClassContent = (props) =>  {
   <div id="Component">
     
     <h1> This class is {course}</h1>
-    <Link to ="/addStudent"><button>Add a student</button></Link>
+    <div id = "classStudentDelete">
+      <Link to ="/addStudent"><button>Add a student</button></Link>
+      <button id = "removeClassButton" type ='submit'>Remove this class</button>
+    </div>
     {
       // this should add a student card for every student added in the class 
       students && students.length > 0 ?
@@ -37,6 +40,12 @@ const ClassContent = (props) =>  {
       <StudentCard name = {students.name} lastname = {students.lastname}/>
       ) : <h2> There are no students in this class</h2>
     }
+    <p id = "notesLabel">Class Notes</p>
+    <form id = "classNotes">
+      <input type='text' name = "studentNotes"></input>
+      <br></br>
+      <button id = "addNoteButton" type ='submit'>Add class note</button>
+    </form>
 
   </div>
 

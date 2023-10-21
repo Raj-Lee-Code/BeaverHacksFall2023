@@ -11,8 +11,11 @@ const StudentCard = (props) => {
             <div> {firstName} {lastName} </div>  
             
             <form>
-                <input type='text' name = "notes"></input>
+                <input type='text' name = "studentNotes"></input>
             </form>
+
+
+
         </div>
     )
 }
