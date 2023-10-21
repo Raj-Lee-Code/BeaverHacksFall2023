@@ -3,7 +3,7 @@
     SETUP
 */
 import express from 'express';
-import { dbConnector } from '../backend/database/db_connecter.js';
+import { dbConnector } from './backend/database/db_connecter.js';
 // const PORT = 3306;
 const port = process.env.PORT || 3000;
 const app = express();
