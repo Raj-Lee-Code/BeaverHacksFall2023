@@ -7,7 +7,7 @@ import ClassContent from '../components/ClassContent';
 
 function HomePage() {
 
-  const [currentClass, setClasses] = useState(0);
+  const [currentClass, setClasses] = useState("math");
 
   function ShowClass(classID) {
     setClasses(classID)
