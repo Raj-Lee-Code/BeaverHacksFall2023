@@ -7,20 +7,12 @@ import { Link } from 'react-router-dom'
 const ClassContent = (props) =>  {
   const [students, setStudents] = useState([]);
 
-    // possible sudo code for the fetch function
-    // const fetchStudents = async () => {
-    //     const {data} = await backend
-    //     from('students')
-    //     select('students who are in the current class')
-
-    //     .order('created_at', { ascending: true });
-    //     // set state of posts
-    //     setClasses(data)
-    //   }
-
-    // useEffect(() => {
-    //     fetchStudents()
-    // }, []);
+    // on load will fetch the students of the particular class
+    useEffect(() => {
+      fetch('https://fall-2023-hackathon.herokuapp.com/class/student') //this is not correct fetch url, just a placeholder
+      .then((res) => res.json())
+      .then((data) => setStudents(students => [...students, data]))
+  }, []);
 
   let course = props.course
 
