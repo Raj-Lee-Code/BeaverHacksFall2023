@@ -5,7 +5,7 @@ const ReadClass = ({token}) => {
     const [classes, setClasses] = useState([]);
 
     // possible sudo code for the fetch function
-    // const fetchPosts = async () => {
+    // const fetchClasses = async () => {
     //     const {data} = await backend
     //     from('classes')
     //     select('*')
