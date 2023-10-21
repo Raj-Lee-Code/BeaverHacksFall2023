@@ -4,20 +4,13 @@ const ReadClass = ({token}) => {
 
     const [classes, setClasses] = useState([]);
 
-    // possible sudo code for the fetch function
-    // const fetchClasses = async () => {
-    //     const {data} = await backend
-    //     from('classes')
-    //     select('*')
 
-    //     .order('created_at', { ascending: true });
-    //     // set state of posts
-    //     setClasses(data)
-    //   }
-
-    // useEffect(() => {
-    //     fetchClasses()
-    // }, []);
+    // on load will fetch the classes of the particular teacher
+    useEffect(() => {
+        fetch('https://fall-2023-hackathon.herokuapp.com/educator/classes') //this is not correct fetch url, just a placeholder
+        .then((res) => res.json())
+        .then((data) => setClasses(classes => [...classes, data]))
+    }, []);
 
     return (
         <div>

@@ -29,7 +29,7 @@ function HomePage() {
 
           </div>
       </div>
-      
+    
       <div >
         {
         currentClass == 0 ?
