@@ -81,7 +81,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Points`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`Points` (
-  `pointID` INT NOT NULL,
+  `pointID` INT AUTO_INCREMENT,
   `pointName` VARCHAR(75) NOT NULL,
   `defaultDailyPoints` INT NULL,
   PRIMARY KEY (`pointID`))
@@ -129,7 +129,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`ClassNotes` (
   `classNoteID` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NOT NULL,
-  `noteText` VARCHAR(45) NOT NULL,
+  `noteText` TEXT(500) NOT NULL,
   `classID` INT NOT NULL,
   PRIMARY KEY (`classNoteID`),
     FOREIGN KEY (`classID`) REFERENCES `sati25kfy4p9qm1c`.`Classes` (`classID`)
@@ -138,6 +138,53 @@ CREATE TABLE IF NOT EXISTS `sati25kfy4p9qm1c`.`ClassNotes` (
 ENGINE = InnoDB;
 
 
+-- Insert test educators
+INSERT INTO Educators (fName, lName, emailAddress, password)
+	VALUES ("Hermes", "Conrad", "conradh@planetexpress.edu", "Manwich!"),
+			("Zapp", "Brannigan", "branniganz@numbus.edu", "itsVelour#1");
+            
+-- Insert test Classes
+INSERT INTO Classes (name, period, educatorID)
+	VALUES ("Orchestra", 3, 2),
+			("Calculus", NULL, 1),
+            ("Ceramics", 6, 1);
+
+-- Insert test students
+INSERT INTO Students (fName, lName)
+	VALUES ("Bart", "Simpson"),
+			("Marge", "Simpson"),
+            ("Ned", "Flanders");
+            
+-- Insert test students into classes
+INSERT INTO studentInClass
+	VALUES (1, 1),
+			(2, 1),
+            (2, 3),
+            (2, 2),
+            (3, 2);
+            
+-- INSERT test Notes
+INSERT INTO Notes (date, noteText, studentID)
+	VALUES ("2023-10-20", "Needs help at lunch on Tuesday", 2),
+		("2023-10-20", "Cello needs bridge repaired", 1);
+
+-- Insert test Points
+INSERT INTO Points (pointName, defaultDailyPoints)
+	VALUES ("Participation Points", 4),
+			("Has Supplies", 2),
+            ("Homework Check", 2);
+
+-- Insert test PointsInClasses
+INSERT INTO PointsInClasses
+	VALUES (1, 1),
+			(2, 1),
+            (1, 2);
+            
+-- Insert test ClassNotes
+INSERT INTO ClassNotes (date, noteText, classID)
+	VALUES ("2023-10-20", "Send reminder email about performance on November 23rd", 1),
+			("2023-10-20", "Make copies of homework 7 to use as sub lesson", 2);
+    
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
