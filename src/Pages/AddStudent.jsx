@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import './AddStudent.css'
 import { Link } from 'react-router-dom'
 function AddStudent() {
-  const [student, setStudent] = useState([]);
+  const [student, setStudent] = useState({ firstName: '', lastName: '' });
 
   const handleOnSubmit= (e) => {
     e.preventDefault();
     // change endpoint api location from localhost *****
     fetch('https://someAddress/addStudent', { 
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ student }),
       })
       .then(function(response) {
