@@ -3,7 +3,7 @@
     SETUP
 */
 import express from 'express';
-const path = require('path');
+import path from 'path';
 
 import { createDbConnection } from './backend/database/db_connecter.js';
 // const PORT = 3306;
