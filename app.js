@@ -3,6 +3,8 @@
     SETUP
 */
 import express from 'express';
+const path = require('path');
+
 import { createDbConnection } from './backend/database/db_connecter.js';
 // const PORT = 3306;
 const port = process.env.PORT || 3000;
@@ -18,7 +20,8 @@ connection.connect();
 //     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 //     allowedHeaders: ['Content-Type', 'Authorization']
 //   }));
-
+// Serve static files (like JavaScript and CSS) from the "dist" folder
+app.use(express.static(path.join(__dirname, 'dist')));
 /*
     ROUTES
 */
@@ -188,6 +191,13 @@ app.get('/getClassNotes', (req, res) => {
         });
     });
     
+
+
+// Serve your React application from the root URL
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 /*
     LISTENER
 */
